@@ -6,8 +6,6 @@ import urllib
 import urllib2
 from HTMLParser import HTMLParser
 
-import argparse
-
 
 __author__ = 'Nick Pack <nick@nickpack.com>'
 
@@ -46,9 +44,6 @@ def make_request(values):
     :return: str The HTML body
     """
 
-    # We're only interested in male names
-    values['sex'] = 'M'
-
     req = urllib2.Request(NAME_DB_URL, urllib.urlencode(values))
     response = urllib2.urlopen(req)
 
@@ -70,14 +65,14 @@ def make_request(values):
         sys.exit(4)
 
 
-def parse_body(body, name, end_year=2014):
+def parse_body(body, name, end_year):
     """
     Parse the HTML returned by the make_request function.
 
     This is horrible, please don't make me parse HTML ever again!
 
     :param body: str HTML response body
-    :return:
+    :return: int The mean popularity value
     """
 
     data_dict = {}
@@ -108,6 +103,8 @@ def main():
 
     :return: str
     """
+    import argparse
+
     parser = argparse.ArgumentParser(
         description='Gives the mean of rank of a male name within the top '
                     '1000 results over a given period of time.'
@@ -115,9 +112,11 @@ def main():
 
     parser.add_argument('name', metavar='name', type=str, help='The name to look up')
     # Technically this should validate >= 1900, but as the web service doesnt care, neither do I!
-    parser.add_argument('start', metavar='start_year', type=int, help='The start year')
-    parser.add_argument('end', metavar='end_year', type=int, help='The end year')
+    parser.add_argument('start', metavar='start_year', type=int, nargs='?', default=1900, help='The start year')
+    parser.add_argument('end', metavar='end_year', type=int, nargs='?', default=2014, help='The end year')
     args = vars(parser.parse_args())
+    # We're only interested in male names
+    args['sex'] = 'M'
 
     print parse_body(make_request(args), end_year=args['end'], name=args['name'])
     sys.exit(0)
