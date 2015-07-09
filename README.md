@@ -12,7 +12,7 @@ Running the script is pretty simple really, it has a shebang line which uses env
 
 ```
 imagination-test:develop$ ./popular_names.py -h
-usage: popular_names.py [-h] name start_year end_year
+usage: popular_names.py [-h] name [start_year] [end_year]
 
 Gives the mean of rank of a male name within the top 1000 results over a given
 period of time.
@@ -42,3 +42,14 @@ Anything greater than 0 for a return code indicates an error, a table of which c
 | 2           	| Invalid URL for web service                                 	|
 | 3           	| HTTP Error encountered after connecting to the web service  	|
 | 4           	| Generic 'Pokemon' exception handler - any other error                                                             	|
+
+Author
+------
+```
+Nick Pack <nick@nickpack.com>
+```
+
+Licence
+--------
+Copyright (c) 2015 Nick Pack
+Licensed under the MIT license.
