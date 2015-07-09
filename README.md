@@ -43,6 +43,15 @@ Anything greater than 0 for a return code indicates an error, a table of which c
 | 3           	| HTTP Error encountered after connecting to the web service  	|
 | 4           	| Generic 'Pokemon' exception handler - any other error                                                             	|
 
+Installing
+-----------
+I don't really see why you'd want to, but should you wish to install this systemwide, a setup.py has been provided,
+this will install the script into your python environment and can be called as: popular-names
+
+```
+python setup.py install
+```
+
 Author
 ------
 ```
